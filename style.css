@@ -279,23 +279,52 @@ img {
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
 
 .cat-card {
+  display: block;
   background: white;
-  border-radius: 24px;
-  padding: 35px 28px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
   transition: 0.35s;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: #1f1f1f;
 }
 
 .cat-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
-.icon {
+.cat-img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.cat-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.cat-card:hover .cat-img img {
+  transform: scale(1.05);
+}
+
+.cat-card h4 {
+  padding: 18px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+.cat-card-home .icon {
   width: 70px;
   height: 70px;
   border-radius: 20px;
@@ -303,23 +332,10 @@ img {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #8b5e3c;
 }
 
-.icon svg {
-  width: 32px;
-  height: 32px;
-  fill: #8b5e3c;
-}
-
-.cat-card h4 {
-  margin-bottom: 12px;
-  font-size: 1.2rem;
-}
-
-.cat-card p {
-  color: #666;
-  line-height: 1.7;
-}
 
 /* =========================
    PRODUCTS
