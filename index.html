@@ -1,42 +1,58 @@
 <!DOCTYPE html>
 <html lang="sq">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Mobileri Adi Gazi" />
+  <meta name="description"
+    content="Mobilje moderne dhe punime druri premium. Kuzhina, dollape, krevate, tavolina, dyer dhe shkallë druri me cilësi të lartë për shtëpinë tuaj." />
+  <meta name="keywords" content="mobileri, mobilje, kuzhina, dollape, dyer, druri, Fushë Krujë, Nikel, Shqipëri" />
+  <meta name="author" content="Mobileri Adi Gazi" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mobileri Adi Gazi" />
+  <meta property="og:description" content="Mobilje moderne dhe punime druri premium për çdo ambient të shtëpisë." />
+  <meta property="og:image" content="logo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
 
   <title>Mobileri Adi Gazi</title>
 
-  <link rel="stylesheet" href="style.css"/>
-
+  <link rel="stylesheet" href="style.css" />
   <!-- FONT AWESOME -->
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 </head>
-<body>
 
-  <!-- NAVBAR -->
+<body>
 
   <header class="navbar">
 
     <div class="container navbar-inner">
 
-      <a href="#" class="navbar-logo">
+      <!-- LOGO -->
+      <a href="index.html" class="navbar-logo" aria-label="Mobileri Adi Gazi Home">
         <span class="logo-dot"></span>
         Mobileri Adi Gazi
       </a>
 
       <nav class="navbar-menu">
 
-        <a href="#home">Kreu</a>
+        <a href="index.html">Kreu</a>
         <a href="categories.html">Kategoritë</a>
-        <a href="products.html">Produktet</a>
+        <a href=".html">Produktet</a>
         <a href="#about">Rreth Nesh</a>
         <a href="contact.html">Kontakt</a>
 
       </nav>
 
-      <div class="hamburger" id="hamburger">
+      <div class="hamburger" id="hamburger" aria-label="Open menu">
 
         <span></span>
         <span></span>
@@ -47,145 +63,66 @@
     </div>
 
     <!-- MOBILE MENU -->
-
     <div class="mobile-menu" id="mobileMenu">
 
-      <a href="#home">Kreu</a>
-      <a href="#categories">Kategoritë</a>
-      <a href="#products">Produktet</a>
-      <a href="#process">Procesi</a>
+      <a href="index.html">Kreu</a>
+      <a href="categories.html">Produktet</a>
       <a href="#about">Rreth Nesh</a>
-      <a href="#contact">Kontakt</a>
+      <a href="contact.html">Kontakt</a>
 
-      <a href="https://wa.me/355682054255"
-      class="btn btn-primary">
+      <a href="https://wa.me/355682054255" class="btn btn-primary" target="_blank">
         Kontakto Tani
       </a>
 
     </div>
 
   </header>
+  <section id="home" class="hero">
 
-  <!-- HERO -->
+    <div class="hero-container">
 
-  <section class="hero" id="home">
+      <!-- LEFT CONTENT -->
+      <div class="hero-content">
 
-    <div class="container hero-inner">
-
-      <div class="hero-content reveal">
-
-        <div class="hero-tag">
+        <div class="hero-badge">
           Mobilje Moderne & Punime Druri Premium
         </div>
 
-        <h1>
-          Mobilje moderne për
-          <span class="highlight">
-            çdo ambient
-          </span>
+        <h1 class="hero-title">
+          Mobilje për <span>çdo ambient</span>
         </h1>
 
-        <p class="hero-desc">
-
-          Kuzhina, dollape, krevate, tavolina,
-          dyer, shkallë druri dhe çdo lloj mobilimi
-          modern për shtëpinë tuaj.
-
+        <p class="hero-text">
+          Kuzhina, dollape, krevate, tavolina, dyer dhe shkallë druri të realizuara
+          me cilësi të lartë dhe dizajn modern për shtëpinë tuaj.
         </p>
 
-        <div class="hero-btns">
+        <div class="hero-buttons">
 
-          <a href="#products"
-          class="btn btn-primary">
+          <a href="categories.html" class="btn-primary">
             Shiko Produktet
           </a>
 
-          <a href="https://wa.me/355682054255"
-          class="btn btn-secondary">
+          <a href="https://wa.me/355682054255" target="_blank" class="btn-secondary">
             WhatsApp
           </a>
 
         </div>
 
-        <div class="hero-stats">
-
-          <div class="hero-stat">
-            <strong>Materiale Premium</strong>
-            <span>Cilësi profesionale druri</span>
-          </div>
-
-          <div class="hero-stat">
-            <strong>Dizajn Modern</strong>
-            <span>Mobilje elegante moderne</span>
-          </div>
-
-          <div class="hero-stat">
-            <strong>Punime me Porosi</strong>
-            <span>Sipas kërkesës suaj</span>
-          </div>
-
-        </div>
-
       </div>
 
-      <!-- HERO VISUAL -->
+      <!-- RIGHT IMAGE (ONLY ONE IMAGE - CLEAN) -->
+      <div class="hero-image">
 
-      <div class="hero-visual reveal">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600" alt="Mobilje moderne">
 
-        <div class="hero-card">
-
-          <div class="hero-card-icon">
-            <i class="fa-solid fa-couch"></i>
-          </div>
-
-          <div class="hero-card-label">
-            Sallone Moderne
-          </div>
-
-        </div>
-
-        <div class="hero-card">
-
-          <div class="hero-card-icon">
-            <i class="fa-solid fa-bed"></i>
-          </div>
-
-          <div class="hero-card-label">
-            Dhoma Gjumi
-          </div>
-
-        </div>
-
-        <div class="hero-card">
-
-          <div class="hero-card-icon">
-            <i class="fa-solid fa-chair"></i>
-          </div>
-
-          <div class="hero-card-label">
-            Karrige Moderne
-          </div>
-
-        </div>
-
-        <div class="hero-card">
-
-          <div class="hero-card-icon">
-            <i class="fa-solid fa-door-open"></i>
-          </div>
-
-          <div class="hero-card-label">
-            Dyer & Dollape
-          </div>
-
-        </div>
+        <div class="hero-overlay"></div>
 
       </div>
 
     </div>
 
   </section>
-
   <!-- CATEGORIES -->
 
   <section class="section" id="categories">
@@ -194,7 +131,6 @@
 
       <div class="section-title reveal">
 
-        <span>Kategoritë</span>
         <h2>Çfarë Ofrojmë</h2>
 
       </div>
@@ -203,14 +139,13 @@
 
         <div class="cat-card reveal">
 
-          <div class="icon"
-          style="background:#f6ede5;">
+          <div class="icon" style="background:#f6ede5;">
 
             <i class="fa-solid fa-kitchen-set"></i>
 
           </div>
 
-          <h4>Kuzhina Moderne</h4>
+          <h4>Kuzhina</h4>
 
           <p>
             Kuzhina moderne me dizajn elegant
@@ -221,14 +156,13 @@
 
         <div class="cat-card reveal">
 
-          <div class="icon"
-          style="background:#eef8ef;">
+          <div class="icon" style="background:#eef8ef;">
 
             <i class="fa-solid fa-bed"></i>
 
           </div>
 
-          <h4>Krevate</h4>
+          <h4>Dhoma Gjumi</h4>
 
           <p>
             Krevate moderne dhe komode
@@ -239,14 +173,13 @@
 
         <div class="cat-card reveal">
 
-          <div class="icon"
-          style="background:#edf5ff;">
+          <div class="icon" style="background:#edf5ff;">
 
             <i class="fa-solid fa-chair"></i>
 
           </div>
 
-          <h4>Karrige & Tavolina</h4>
+          <h4>Sallone</h4>
 
           <p>
             Tavolina dhe karrige moderne
@@ -257,14 +190,13 @@
 
         <div class="cat-card reveal">
 
-          <div class="icon"
-          style="background:#f8effa;">
+          <div class="icon" style="background:#f8effa;">
 
             <i class="fa-solid fa-warehouse"></i>
 
           </div>
 
-          <h4>Dollape & Dyer</h4>
+          <h4>Dyer</h4>
 
           <p>
             Punime druri cilësore me
@@ -300,8 +232,7 @@
 
           <div class="product-img">
 
-            <img src="https://placehold.co/600x450?text=Kuzhina+Coming+Soon"
-            alt="Kuzhina Moderne">
+            <img src="https://placehold.co/600x450?text=Kuzhina+Coming+Soon" alt="Kuzhina Moderne">
 
             <div class="product-badge">
               <span class="badge badge-coral">
@@ -330,8 +261,7 @@
                 Punim me porosi
               </div>
 
-              <a href="https://wa.me/355682054255"
-              class="btn btn-sm btn-primary">
+              <a href="https://wa.me/355682054255" class="btn btn-sm btn-primary">
 
                 Kontakto
 
@@ -349,8 +279,7 @@
 
           <div class="product-img">
 
-            <img src="https://placehold.co/600x450?text=Dollape+Coming+Soon"
-            alt="Dollape Moderne">
+            <img src="https://placehold.co/600x450?text=Dollape+Coming+Soon" alt="Dollape Moderne">
 
             <div class="product-badge">
               <span class="badge badge-mint">
@@ -379,8 +308,7 @@
                 Na kontaktoni
               </div>
 
-              <a href="https://wa.me/355682054255"
-              class="btn btn-sm btn-primary">
+              <a href="https://wa.me/355682054255" class="btn btn-sm btn-primary">
 
                 WhatsApp
 
@@ -398,8 +326,7 @@
 
           <div class="product-img">
 
-            <img src="https://placehold.co/600x450?text=Tavolina+Coming+Soon"
-            alt="Tavolina Moderne">
+            <img src="https://placehold.co/600x450?text=Tavolina+Coming+Soon" alt="Tavolina Moderne">
 
             <div class="product-badge">
               <span class="badge badge-sky">
@@ -428,8 +355,7 @@
                 Punim Premium
               </div>
 
-              <a href="https://wa.me/355682054255"
-              class="btn btn-sm btn-primary">
+              <a href="https://wa.me/355682054255" class="btn btn-sm btn-primary">
 
                 Kontakto
 
@@ -464,8 +390,7 @@
 
         <div class="why-card reveal">
 
-          <div class="why-icon"
-          style="background:#fff3e7;">
+          <div class="why-icon" style="background:#fff3e7;">
 
             <i class="fa-solid fa-truck-fast"></i>
 
@@ -486,8 +411,7 @@
 
         <div class="why-card reveal">
 
-          <div class="why-icon"
-          style="background:#eefcf4;">
+          <div class="why-icon" style="background:#eefcf4;">
 
             <i class="fa-solid fa-star"></i>
 
@@ -508,8 +432,7 @@
 
         <div class="why-card reveal">
 
-          <div class="why-icon"
-          style="background:#edf6ff;">
+          <div class="why-icon" style="background:#edf6ff;">
 
             <i class="fa-solid fa-ruler-combined"></i>
 
@@ -530,8 +453,7 @@
 
         <div class="why-card reveal">
 
-          <div class="why-icon"
-          style="background:#faf0ff;">
+          <div class="why-icon" style="background:#faf0ff;">
 
             <i class="fa-solid fa-house"></i>
 
@@ -574,8 +496,7 @@
 
       </p>
 
-      <a href="https://wa.me/355682054255"
-      class="btn">
+      <a href="https://wa.me/355682054255" class="btn">
 
         Kontakto Tani
 
@@ -584,105 +505,56 @@
     </div>
 
   </section>
-
   <!-- CONTACT -->
-
-  <section class="section"
-  id="contact">
+  <section class="section" id="contact">
 
     <div class="container">
 
       <div class="section-title reveal">
-
         <span>Kontakt</span>
         <h2>Na Kontaktoni</h2>
-
       </div>
 
       <div class="why-grid">
 
         <div class="why-card reveal">
-
-          <div class="why-icon"
-          style="background:#fff3e7;">
-
-            <i class="fa-solid fa-location-dot"></i>
-
-          </div>
-
-          <div>
-
-            <h4>Adresa</h4>
-
-            <p>
-              Nikel, Fushë Krujë
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="why-card reveal">
-
-          <div class="why-icon"
-          style="background:#eefcf4;">
-
+          <div class="why-icon" style="background:#eefcf4;">
             <i class="fa-solid fa-phone"></i>
-
           </div>
-
           <div>
-
             <h4>Telefon</h4>
-
-            <p>
-              068 205 4255
-            </p>
-
+            <p>068 205 4255</p>
           </div>
-
         </div>
 
         <div class="why-card reveal">
-
-          <div class="why-icon"
-          style="background:#edf6ff;">
-
+          <div class="why-icon" style="background:#edf6ff;">
             <i class="fa-brands fa-instagram"></i>
-
           </div>
-
           <div>
-
             <h4>Instagram</h4>
-
-            <p>
-              mobileri Adi Gazi
-            </p>
-
+            <p>mobileri Adi Gazi</p>
           </div>
-
         </div>
 
         <div class="why-card reveal">
-
-          <div class="why-icon"
-          style="background:#faf0ff;">
-
+          <div class="why-icon" style="background:#faf0ff;">
             <i class="fa-brands fa-facebook-f"></i>
-
           </div>
-
           <div>
-
             <h4>Facebook</h4>
-
-            <p>
-              mobileri Adi Gazi
-            </p>
-
+            <p>mobileri Adi Gazi</p>
           </div>
+        </div>
 
+        <div class="why-card reveal">
+          <div class="why-icon" style="background:#fff3e7;">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <h4>Adresa</h4>
+            <p>Nikel, Fushë Krujë</p>
+          </div>
         </div>
 
       </div>
@@ -717,22 +589,19 @@
 
           <div class="footer-socials">
 
-            <a href="#"
-            class="social-btn">
+            <a href="#" class="social-btn">
 
               <i class="fa-brands fa-facebook-f"></i>
 
             </a>
 
-            <a href="#"
-            class="social-btn">
+            <a href="#" class="social-btn">
 
               <i class="fa-brands fa-instagram"></i>
 
             </a>
 
-            <a href="https://wa.me/355682054255"
-            class="social-btn">
+            <a href="https://wa.me/355682054255" class="social-btn">
 
               <i class="fa-brands fa-whatsapp"></i>
 
@@ -747,12 +616,10 @@
           <h5>Menu</h5>
 
           <ul>
-
-            <li><a href="#home">Kreu</a></li>
-            <li><a href="#products">Produktet</a></li>
-            <li><a href="#process">Procesi</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-
+            <li><a href="index.html">Kreu</a></li>
+            <li><a href="categories.html">Produktet</a></li>
+            <li><a href="#about">Rreth Nesh</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
           </ul>
 
         </div>
@@ -763,10 +630,15 @@
 
           <ul>
 
-            <li><a href="#">Kuzhina</a></li>
-            <li><a href="#">Dollape</a></li>
-            <li><a href="#">Tavolina</a></li>
-            <li><a href="#">Krevate</a></li>
+            <li><a href="kuzhina.html">Kuzhina</a></li>
+            <li><a href="dhome-gjumi.html">Dhoma e Gjumit</a></li>
+            <li><a href="salloni.html">Salloni</a></li>
+            <li><a href="dhoma-ndenjes.html">Dhoma e Ndenjes</a></li>
+            <li><a href="banjo.html">Banjo</a></li>
+            <li><a href="zyra.html">Zyra</a></li>
+            <li><a href="dhoma-femijeve.html">Dhoma e Fëmijëve</a></li>
+            <li><a href="ballkon.html">Ballkon / Verandë</a></li>
+            <li><a href="dyer.html">Dyer</a></li>
 
           </ul>
 
@@ -829,60 +701,12 @@
 
   <!-- WHATSAPP -->
 
-  <a href="https://wa.me/355682054255"
-  class="whatsapp-fab"
-  target="_blank">
+  <a href="https://wa.me/355682054255" class="whatsapp-fab" target="_blank">
 
     <i class="fa-brands fa-whatsapp"></i>
 
   </a>
-
-  <!-- SCRIPT -->
-
-  <script>
-
-    // MOBILE MENU
-
-    const hamburger =
-    document.getElementById("hamburger");
-
-    const mobileMenu =
-    document.getElementById("mobileMenu");
-
-    hamburger.addEventListener("click", () => {
-
-      mobileMenu.classList.toggle("active");
-
-    });
-
-    // REVEAL ANIMATION
-
-    const reveals =
-    document.querySelectorAll(".reveal");
-
-    window.addEventListener("scroll", () => {
-
-      reveals.forEach((el) => {
-
-        const windowHeight =
-        window.innerHeight;
-
-        const revealTop =
-        el.getBoundingClientRect().top;
-
-        const revealPoint = 1;
-
-        if(revealTop < windowHeight - revealPoint){
-
-          el.classList.add("active");
-
-        }
-
-      });
-
-    });
-
-  </script>
-
+  <script src="script.js"></script>
 </body>
+
 </html>
