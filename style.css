@@ -365,9 +365,11 @@ img {
 }
 
 .product-img img {
+  width: 100%;
   height: 260px;
-  object-fit: cover;
+  object-fit: contain;
   transition: 0.4s;
+  background: #fff;
 }
 
 .product-card:hover img {
