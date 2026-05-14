@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-html {    
+html {
   scroll-behavior: smooth;
 }
 
@@ -819,8 +819,32 @@ footer {
   .hero-container {
     grid-template-columns: 1fr;
   }
-  
+
   .hero-image {
-    order: 2;  /* Image moves below on smaller screens */
+    order: 2;
+    /* Image moves below on smaller screens */
   }
+}
+
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid #e0d8d0;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f1f1f;
+  transition: 0.25s;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.btn-back:hover {
+  background: #8b5e3c;
+  color: white;
+  border-color: #8b5e3c;
 }

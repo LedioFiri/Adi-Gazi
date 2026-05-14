@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Mobileri Adi Gazi" />
+    <meta name="description"
+        content="Mobilje moderne dhe punime druri premium. Kuzhina, dollape, krevate, tavolina, dyer dhe shkallë druri me cilësi të lartë për shtëpinë tuaj." />
+    <meta name="keywords" content="mobileri, mobilje, kuzhina, dollape, dyer, druri, Fushë Krujë, Nikel, Shqipëri" />
+    <meta name="author" content="Mobileri Adi Gazi" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mobileri Adi Gazi" />
+    <meta property="og:description" content="Mobilje moderne dhe punime druri premium për çdo ambient të shtëpisë." />
+    <meta property="og:image" content="logo.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+
+    <title>Mobileri Adi Gazi</title>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../script.js"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+</head>
+
+<body>
+
+
+    <header class="navbar">
+
+        <div class="container navbar-inner">
+
+            <!-- LOGO -->
+            <a href="index.html" class="navbar-logo" aria-label="Mobileri Adi Gazi Home">
+                <span class="logo-dot"></span>
+                Mobileri Adi Gazi
+            </a>
+
+            <nav class="navbar-menu">
+
+                <a href="index.html">Kreu</a>
+                <a href="categories.html">Kategoritë</a>
+                <a href="produktet.html">Produktet</a>
+                <a href="about.html">Rreth Nesh</a>
+                <a href="contact.html">Kontakt</a>
+
+            </nav>
+
+            <div class="hamburger" id="hamburger" aria-label="Open menu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">Kreu</a>
+            <a href="categories.html">Kategoritë</a>
+            <a href="produktet.html">Produktet</a>
+            <a href="about.html">Rreth Nesh</a>
+            <a href="contact.html">Kontakt</a>
+            <a href="https://wa.me/355682054255" class="btn btn-primary" target="_blank">
+                Kontakto Tani
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+
+    <script>
+        // Lightbox
+        (function () {
+            const overlay = document.createElement('div');
+            overlay.className = 'lightbox';
+            overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">&#x2715;</button>
+      <button class="lightbox-prev" aria-label="Previous">&#8592;</button>
+      <img src="" alt="Fullscreen view" />
+      <button class="lightbox-next" aria-label="Next">&#8594;</button>
+    `;
+            document.body.appendChild(overlay);
+
+            const lbImg = overlay.querySelector('img');
+            const btnClose = overlay.querySelector('.lightbox-close');
+            const btnPrev = overlay.querySelector('.lightbox-prev');
+            const btnNext = overlay.querySelector('.lightbox-next');
+
+            let images = [];
+            let current = 0;
+
+            function open(idx) {
+                current = idx;
+                lbImg.src = images[current].src;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prev() { open((current - 1 + images.length) % images.length); }
+            function next() { open((current + 1) % images.length); }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                images = Array.from(document.querySelectorAll('.gallery-grid img'));
+                images.forEach((img, i) => img.addEventListener('click', () => open(i)));
+            });
+
+            btnClose.addEventListener('click', close);
+            btnPrev.addEventListener('click', prev);
+            btnNext.addEventListener('click', next);
+            overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+            document.addEventListener('keydown', e => {
+                if (!overlay.classList.contains('active')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') prev();
+                if (e.key === 'ArrowRight') next();
+            });
+        })();
+    </script>
+
+
+
+    <style>
+        /* ── Gallery Section ── */
+        .product-gallery {
+            padding: 100px 0 80px;
+        }
+
+        .product-gallery .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        .product-gallery h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: #1f1f1f;
+        }
+
+
+        /* ── Image Grid ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            display: block;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ── Video ── */
+        .video-box {
+            margin-top: 10px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-box video {
+            width: 100%;
+            max-height: 520px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ── Lightbox Overlay ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            width: auto;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            color: white;
+            font-size: 2.2rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            z-index: 10000;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+        }
+
+        .lightbox-prev {
+            left: 16px;
+        }
+
+        .lightbox-next {
+            right: 16px;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .gallery-grid img,
+            .gallery-grid img:first-child {
+                grid-column: unset;
+                height: 260px;
+            }
+
+            .video-box video {
+                max-height: 280px;
+            }
+
+            .lightbox-prev {
+                left: 8px;
+            }
+
+            .lightbox-next {
+                right: 8px;
+            }
+
+
+        }
+    </style>
+
+
+
+
+    <section class="product-gallery">
+        <div class="container" style="padding-top: 20px;">
+            <a href="javascript:history.back()" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Kthehu
+            </a>
+        </div>
+        <div class="container">
+
+            <h2>Dere Temporat me Lyerje </h2>
+
+            <div class="gallery-grid">
+                <img src="67038.jpg" alt="Dera 1 - Image 1">
+                <img src="67042.jpg" alt="Dera 1 - Image 2">
+                <img src="67044.jpg" alt="Dera 1 - Image 3">
+                <img src="67389.jpg" alt="Dera 1 - Image 4">
+            </div>
+
+            <div class="video-box">
+                <video controls>
+                    <source src="2026-05-10-010658562.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="navbar-logo">
+                        <span class="logo-dot"></span>
+                        Mobileri Adi Gazi
+                    </div>
+
+                    <p>
+                        Mobilje moderne dhe punime druri
+                        premium për çdo ambient të shtëpisë.
+                    </p>
+
+                    <div class="footer-socials">
+
+                        <a href="#" class="social-btn">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#" class="social-btn">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="https://wa.me/355682054255" class="social-btn">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h5>Menu</h5>
+
+                    <ul>
+                        <li><a href="index.html">Kreu</a></li>
+                        <li><a href="categories.html">Produktet</a></li>
+                        <li><a href="#about">Rreth Nesh</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h5>Kategoritë</h5>
+
+                    <ul>
+                        <li><a href="kuzhina.html">Kuzhina</a></li>
+                        <li><a href="dhome-gjumi.html">Dhoma e Gjumit</a></li>
+                        <li><a href="salloni.html">Salloni</a></li>
+                        <li><a href="dhoma-ndenjes.html">Dhoma e Ndenjes</a></li>
+                        <li><a href="banjo.html">Banjo</a></li>
+                        <li><a href="zyra.html">Zyra</a></li>
+                        <li><a href="dhoma-femijeve.html">Dhoma e Fëmijëve</a></li>
+                        <li><a href="ballkon.html">Ballkon / Verandë</a></li>
+                        <li><a href="dyer.html">Dyer</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-col">
+
+                    <h5>Kontakt</h5>
+
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-solid fa-location-dot"></i></span>
+                        <span>Nikel, Fushë Krujë</span>
+                    </div>
+
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-solid fa-phone"></i></span>
+                        <span>068 205 4255</span>
+                    </div>
+
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-brands fa-instagram"></i></span>
+                        <span>mobileri Adi Gazi</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                © 2026 Mobileri Adi Gazi —
+                Të gjitha të drejtat e rezervuara.
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- WHATSAPP -->
+
+    <a href="https://wa.me/355682054255" class="whatsapp-fab" target="_blank">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </a>
+    <script src="script.js"></script>
+</body>
+
+</html>
