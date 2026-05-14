@@ -848,3 +848,42 @@ footer {
   color: white;
   border-color: #8b5e3c;
 }
+
+
+.order-section {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px 20px;
+    background: #f8f6f3;
+    border-radius: 16px;
+}
+
+.order-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #1f1f1f;
+}
+
+.order-section p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.whatsapp-order-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.whatsapp-order-btn:hover {
+    background: #1ebe5d;
+    transform: scale(1.05);
+}
