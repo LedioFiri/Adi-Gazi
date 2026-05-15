@@ -853,39 +853,195 @@ footer {
 
 
 .order-section {
-    text-align: center;
-    margin-top: 40px;
-    padding: 30px 20px;
-    background: #f8f6f3;
-    border-radius: 16px;
+  text-align: center;
+  margin-top: 40px;
+  padding: 30px 20px;
+  background: #f8f6f3;
+  border-radius: 16px;
 }
 
 .order-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #1f1f1f;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #1f1f1f;
 }
 
 .order-section p {
-    margin-bottom: 20px;
-    color: #555;
+  margin-bottom: 20px;
+  color: #555;
 }
 
 .whatsapp-order-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #25D366;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 50px;
-    font-size: 1rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .whatsapp-order-btn:hover {
-    background: #1ebe5d;
-    transform: scale(1.05);
+  background: #1ebe5d;
+  transform: scale(1.05);
+}
+
+/* =========================
+   PRODUCT PAGE LAYOUT
+========================= */
+.product-gallery {
+  padding: 100px 0 80px;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: auto;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f1f1f;
+}
+
+/* =========================
+   GALLERY GRID
+========================= */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   VIDEO BOX (YOUTUBE)
+========================= */
+.video-box {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 520px;
+  border-radius: 12px;
+  display: block;
+}
+
+/* =========================
+   LIGHTBOX (FULLSCREEN FIX)
+========================= */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================
+   LIGHTBOX BUTTONS
+========================= */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  z-index: 10000;
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+}
+
+.lightbox-prev {
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 640px) {
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid img {
+    height: 260px;
+  }
+
+  .video-box iframe {
+    height: 280px;
+  }
+
+  .lightbox-prev {
+    left: 8px;
+  }
+
+  .lightbox-next {
+    right: 8px;
+  }
 }
