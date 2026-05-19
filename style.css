@@ -1045,3 +1045,48 @@ h2 {
     right: 8px;
   }
 }
+
+
+
+
+/* MODERN PRODUCT GRID */
+
+.modern-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    height: 320px;
+    overflow: hidden;
+}
+
+.modern-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s ease;
+}
+
+/* BIG IMAGE */
+.modern-grid .main-img {
+    grid-row: span 2;
+}
+
+/* HOVER EFFECT */
+.product-card:hover .modern-grid img {
+    transform: scale(1.03);
+}
+
+/* BETTER CARD STYLE */
+.product-card {
+    border-radius: 28px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
