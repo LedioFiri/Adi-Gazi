@@ -1,6 +1,29 @@
 console.log("SCRIPT LOADED");
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Keep gallery decoding inexpensive on phones. Cloudinary supplies modern formats
+  // where a responsive transformed URL is present in the markup.
+  document.querySelectorAll('img[src*="res.cloudinary.com"]').forEach((image) => {
+    image.loading = 'lazy';
+    image.decoding = 'async';
+  });
+
+  const categoryNames = {
+    kuzhina: 'Kuzhinat',
+    kende: 'Këndet e divaneve',
+    krevate: 'Krevatet',
+    minibare: 'Minibaret',
+    dollape: 'Dollapet dhe raftet',
+    Dyer: 'Dyer',
+    shkalle: 'Shkallët'
+  };
+  const folder = window.location.pathname.split('/').filter(Boolean).slice(-2, -1)[0];
+  const backLink = document.querySelector('.product-gallery .btn-back');
+  if (backLink && categoryNames[folder]) {
+    backLink.href = 'index.html';
+    backLink.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Kthehu te ${categoryNames[folder]}`;
+  }
+
   // ---- Cookie consent banner ----
   const cookieChoice = localStorage.getItem('cookieConsent');
 

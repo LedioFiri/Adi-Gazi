@@ -1050,6 +1050,7 @@ footer {
   margin: auto;
 }
 
+h1,
 h2 {
   font-size: 2rem;
   font-weight: 700;
@@ -1073,6 +1074,22 @@ h2 {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .product-gallery {
+    padding: 82px 0 48px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .gallery-grid img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .gallery-grid img:hover {
