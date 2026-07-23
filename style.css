@@ -647,6 +647,78 @@ footer {
 }
 
 /* =========================
+   FLIPBOOK CATALOG
+========================= */
+.flipbook-showcase {
+  margin: -24px auto 64px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid rgba(139, 94, 60, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 16px 38px rgba(52, 35, 23, 0.09);
+}
+
+.flipbook-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.flipbook-heading span {
+  display: block;
+  margin-bottom: 6px;
+  color: #8b5e3c;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.flipbook-heading h2 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.flipbook-showcase .fp-iframe {
+  display: block;
+  width: 100%;
+  height: clamp(300px, 48vw, 540px);
+  border: 1px solid #e4ddd7;
+  border-radius: 12px;
+  background: #f8f6f3;
+}
+
+.flipbook-open-link {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .flipbook-showcase {
+    margin-bottom: 46px;
+    padding: 18px 12px 12px;
+    border-radius: 16px;
+  }
+
+  .flipbook-showcase .fp-iframe {
+    height: 267px;
+    border-radius: 9px;
+  }
+
+  .flipbook-open-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: fit-content;
+    margin: 16px auto 4px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: #8b5e3c;
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+}
+
+/* =========================
    COOKIE BANNER
 ========================= */
 
