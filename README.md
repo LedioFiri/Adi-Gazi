@@ -1,6 +1,6 @@
-# Mobileri Adi Gazi
+# Mobileri Gazi Adi
 
-Static portfolio website for **Mobileri Adi Gazi**, a furniture and woodwork business based in Nikel, Fushe Kruje. The site presents custom furniture categories, product galleries, business information, and contact options through WhatsApp, phone, Instagram, and Facebook.
+Static portfolio website for **Mobileri Gazi Adi**, a furniture and woodwork business based in Nikel, Fushe Kruje. The site presents custom furniture categories, product galleries, business information, and contact options through WhatsApp, phone, Instagram, and Facebook.
 
 ## Overview
 
@@ -96,12 +96,12 @@ You can also use a simple local server if preferred.
 ## Contact Details Used in the Site
 
 ```text
-Business: Mobileri Adi Gazi
+Business: Mobileri Gazi Adi
 Phone: 068 205 4255
 WhatsApp: https://wa.me/355682054255
 Location: Nikel, Fushe Kruje
-Instagram: mobileri Adi Gazi
-Facebook: mobileri Adi Gazi
+Instagram: Mobileri Gazi Adi
+Facebook: Mobileri Gazi Adi
 ```
 
 ## Customization
@@ -143,3 +143,6 @@ Ledio Firi
 GitHub: Ledio Firi
 Email: firiledio2007@gmail.com
 ```
+
+
+

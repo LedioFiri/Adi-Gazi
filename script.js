@@ -58,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
       privacyNotice.innerHTML = `
         <button type="button" class="privacy-notice-close" aria-label="Mbyll politiken e privatesise">&times;</button>
         <h3>Politika e Privatesise</h3>
-        <p>Mobileri Adi Gazi respekton privatesine tuaj. Kjo faqe shpjegon se si mund te mbledhim dhe perdorim informacionin kur vizitoni faqen tone.</p>
+        <p>Mobileri Gazi Adi respekton privatesine tuaj. Kjo faqe shpjegon se si mund te mbledhim dhe perdorim informacionin kur vizitoni faqen tone.</p>
         <p>Ne perdorim Google Analytics per te kuptuar se si vizitoret perdorin faqen tone. Google Analytics mund te mbledhe informacione si faqet qe vizitoni, pajisja dhe Browser-i qe perdorni, vendndodhja e perafert (Shteti ose Qyteti) dhe koha e qendrimit ne faqe.</p>
         <p>Keto te dhena na ndihmojne te permiresojme faqen dhe sherbimet tona. Google mund t'i perpunojne keto te dhena sipas politikes se tij te privatesise.</p>
         <p>Ne gjithashtu mund te marrim informacion personal nese na kontaktoni me telefon, WhatsApp, Instagram ose Facebook, si emri, numri i telefonit dhe detajet e kerkeses suaj.</p>
         <p>Ne nuk shesim te dhenat tuaja personale.</p>
         <p>Per me shume informacion rreth menyres si Google perdor te dhenat, vizitoni:<br><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">https://policies.google.com/technologies/partner-sites</a></p>
         <p>Mund te caktivizoni Google Analytics ketu:<br><a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout</a></p>
-        <p>Per pyetje, na kontaktoni:<br>Mobileri Adi Gazi<br>Nikel, Fushe Kruje<br>Tel: 068 205 4255</p>
+        <p>Per pyetje, na kontaktoni:<br>Mobileri Gazi Adi<br>Nikel, Fushe Kruje<br>Tel: 068 205 4255</p>
       `;
 
       document.body.appendChild(privacyNotice);
@@ -195,4 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') prev();
   });
 })();
+
+
+
 
