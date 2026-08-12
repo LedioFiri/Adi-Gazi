@@ -405,32 +405,12 @@ body > .section:first-of-type {
   padding: 18px 18px 46px 0;
 }
 
-.hero-image::before {
+..hero-image::before {
   position: absolute;
   inset: 0 0 28px 18px;
   content: '';
   border: 1px solid rgba(154, 107, 63, 0.32);
   border-radius: var(--radius-lg);
-}
-
-.hero-image::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 180px;
-  height: 112px;
-  content: '20+  VITE\A EKSPERIENCË';
-  white-space: pre;
-  display: grid;
-  place-content: center;
-  background: var(--color-accent);
-  color: #fff;
-  border-radius: 50% 0 0 0;
-  font-size: 0.73rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1.65;
-  text-align: center;
 }
 
 .hero-image img {
