@@ -434,6 +434,62 @@ body > .section:first-of-type {
   background: linear-gradient(180deg, transparent 52%, rgba(31, 30, 27, 0.18));
 }
 
+/* Text-only homepage hero */
+
+.hero--text-only {
+  display: grid;
+  min-height: min(780px, 100svh);
+  padding: 154px 0 92px;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(154, 107, 63, 0.13), transparent 35%),
+    linear-gradient(180deg, #FAF9F6 0%, var(--color-bg) 100%);
+}
+
+.hero--text-only::before {
+  top: 50%;
+  bottom: auto;
+  left: 50%;
+  width: min(760px, 72vw);
+  height: min(760px, 72vw);
+  background: transparent;
+  border: 1px solid rgba(154, 107, 63, 0.11);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero--text-only .hero-container {
+  display: block;
+  width: min(1100px, calc(100% - 64px));
+}
+
+.hero--text-only .hero-content {
+  max-width: 980px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero--text-only .hero-badge {
+  margin: 0 auto 28px;
+}
+
+.hero--text-only .hero-title {
+  max-width: 980px;
+  margin: 0 auto 28px;
+  font-size: clamp(4rem, 7.2vw, 7rem);
+  line-height: 0.94;
+}
+
+.hero--text-only .hero-text {
+  max-width: 690px;
+  margin: 0 auto 36px;
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+}
+
+.hero--text-only .hero-buttons {
+  justify-content: center;
+}
+
 /* Portfolio cards */
 
 .products-grid,
@@ -577,7 +633,7 @@ body > .section:first-of-type {
 .products-grid > a.product-card > .product-body::after {
   display: inline-flex;
   width: fit-content;
-  content: 'Punuar sipas porosisë';
+  content: 'Shiko më shumë';
   color: var(--color-accent-dark);
   font-family: var(--font-body);
   font-size: 0.69rem;
@@ -955,6 +1011,10 @@ body > .section:first-of-type {
 
 .gallery-grid img:first-child:nth-last-child(n+3) {
   height: clamp(460px, 50vw, 650px) !important;
+  grid-column: 1 / -1;
+}
+
+.gallery-grid img:only-child {
   grid-column: 1 / -1;
 }
 
@@ -1408,8 +1468,16 @@ body > main:not(.page-content) > div > h2 {
     min-height: 0;
   }
 
+  .hero--text-only {
+    min-height: min(720px, 100svh);
+  }
+
   .hero::before {
     display: none;
+  }
+
+  .hero--text-only::before {
+    display: block;
   }
 
   .hero-container {
@@ -1529,6 +1597,20 @@ body > main:not(.page-content) > div > h2 {
     padding: 122px 0 72px;
   }
 
+  .hero--text-only {
+    min-height: 680px;
+    padding: 126px 0 76px;
+  }
+
+  .hero--text-only::before {
+    width: min(700px, 95vw);
+    height: min(700px, 95vw);
+  }
+
+  .hero--text-only .hero-title {
+    font-size: clamp(3.65rem, 11vw, 5.7rem);
+  }
+
   .hero-container {
     grid-template-columns: 1fr;
     gap: 52px;
@@ -1632,6 +1714,16 @@ body > main:not(.page-content) > div > h2 {
     padding-top: 111px;
   }
 
+  .hero--text-only {
+    min-height: 650px;
+    padding: 124px 0 68px;
+  }
+
+  .hero--text-only::before {
+    width: min(520px, 135vw);
+    height: min(520px, 135vw);
+  }
+
   .hero-badge {
     max-width: 100%;
     white-space: normal;
@@ -1641,6 +1733,18 @@ body > main:not(.page-content) > div > h2 {
   .hero h1 {
     margin-bottom: 20px;
     font-size: clamp(3.2rem, 16vw, 4.7rem);
+  }
+
+  .hero--text-only .hero-title {
+    margin-bottom: 22px;
+    font-size: clamp(3.15rem, 15vw, 4.25rem);
+    line-height: 0.98;
+  }
+
+  .hero--text-only .hero-text {
+    margin-bottom: 30px;
+    font-size: 0.98rem;
+    line-height: 1.75;
   }
 
   .hero-buttons,

@@ -8,6 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
     image.decoding = 'async';
   });
 
+  // Preload product details in the WhatsApp order message.
+  const productWhatsAppButton = document.querySelector('.order-section .whatsapp-order-btn');
+  const productImage = document.querySelector('.gallery-grid img');
+  const productTitle = document.querySelector('.product-gallery h1');
+
+  if (productWhatsAppButton && productImage) {
+    const productName = productTitle?.textContent.trim() || 'këtë produkt';
+    const message = [
+      'Përshëndetje!',
+      `A mund të marr më shumë informacion për ${productName}?`,
+      '',
+      `Fotoja e produktit: ${productImage.src}`,
+      `Faqja e produktit: ${window.location.href}`
+    ].join('\n');
+
+    productWhatsAppButton.href = `https://wa.me/355682054255?text=${encodeURIComponent(message)}`;
+  }
+
   const categoryNames = {
     kuzhina: 'Kuzhinat',
     kende: 'Këndet e divaneve',
@@ -134,66 +152,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 (function () {
-  const overlay = document.createElement('div');
-  overlay.className = 'lightbox';
-  overlay.innerHTML = `
-      <button class="lightbox-close">✕</button>
-      <button class="lightbox-prev">←</button>
-      <img src="" />
-      <button class="lightbox-next">→</button>
+  function initLightbox() {
+    const images = Array.from(document.querySelectorAll('.gallery-grid img'));
+
+    // Category and informational pages do not have a product gallery.
+    if (!images.length) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox';
+    overlay.innerHTML = `
+      <button type="button" class="lightbox-close" aria-label="Mbyll foton">✕</button>
+      <button type="button" class="lightbox-prev" aria-label="Fotoja e mëparshme">←</button>
+      <img src="" alt="Pamje e zmadhuar e produktit" />
+      <button type="button" class="lightbox-next" aria-label="Fotoja tjetër">→</button>
     `;
-  document.body.appendChild(overlay);
+    document.body.appendChild(overlay);
 
-  const img = overlay.querySelector('img');
-  const closeBtn = overlay.querySelector('.lightbox-close');
-  const prevBtn = overlay.querySelector('.lightbox-prev');
-  const nextBtn = overlay.querySelector('.lightbox-next');
+    const img = overlay.querySelector('img');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+    const prevBtn = overlay.querySelector('.lightbox-prev');
+    const nextBtn = overlay.querySelector('.lightbox-next');
+    let index = 0;
 
-  let images = [];
-  let index = 0;
+    function open(i) {
+      index = i;
+      img.src = images[index].currentSrc || images[index].src;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-  function open(i) {
-    index = i;
-    img.src = images[index].src;
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
-  function close() {
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+    function next() {
+      open((index + 1) % images.length);
+    }
 
-  function next() {
-    open((index + 1) % images.length);
-  }
-
-  function prev() {
-    open((index - 1 + images.length) % images.length);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    images = document.querySelectorAll('.gallery-grid img');
+    function prev() {
+      open((index - 1 + images.length) % images.length);
+    }
 
     images.forEach((el, i) => {
       el.addEventListener('click', () => open(i));
     });
-  });
 
-  closeBtn.onclick = close;
-  nextBtn.onclick = next;
-  prevBtn.onclick = prev;
+    closeBtn.addEventListener('click', close);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
 
-  overlay.onclick = (e) => {
-    if (e.target === overlay) close();
-  };
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
 
-  document.addEventListener('keydown', (e) => {
-    if (!overlay.classList.contains('active')) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
-  });
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox, { once: true });
+  } else {
+    initLightbox();
+  }
 })();
 
 
