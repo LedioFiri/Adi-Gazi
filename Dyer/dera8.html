@@ -6,7 +6,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5R6V17EBNQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-5R6V17EBNQ');
     </script>
@@ -22,107 +22,400 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../script.js" defer></script>
     <style>
-        body { background: #fbfaf8; color: #292825; }
-        .navbar { background: rgba(251, 250, 248, 0.94); }
-        .product-gallery { padding: 108px 0 84px !important; }
-        .product-gallery .container { width: min(820px, calc(100% - 40px)) !important; }
-        .product-back-link { display: inline-block; margin-bottom: 18px; color: #77756f; font-size: 0.84rem; font-weight: 600; }
-        .product-back-link:hover { color: #57774f; }
-        .product-gallery-stack { display: grid; gap: 14px; }
-        .product-thumbnails { display: grid; grid-template-columns: repeat(3, minmax(0, 112px)); gap: 14px; justify-content: start; }
-        .product-thumbnail { width: 100%; padding: 0; border: 0; border-radius: 18px; background: transparent; cursor: pointer; }
-        .product-thumbnail img { width: 100%; aspect-ratio: 4 / 3; border-radius: 18px; background: #f2f0ec; object-fit: cover; }
-        .product-thumbnail[aria-pressed="true"] { outline: 2px solid #839774; outline-offset: 3px; }
-        .product-thumbnail:focus-visible { outline: 2px solid #839774; outline-offset: 3px; }
-        .product-hero-image { width: 100%; height: clamp(340px, 62vw, 580px); border-radius: 24px; background: #f2f0ec; object-fit: contain; }
-        .product-details { padding: 30px 0 8px; }
-        .product-eyebrow { color: #687f56; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
-        .product-details h1 { width: 100%; margin: 8px 0 13px !important; font-size: clamp(1.85rem, 4vw, 2.8rem) !important; font-weight: 400 !important; line-height: 1.12 !important; }
-        .product-summary { max-width: 680px; color: #66645f; font-size: 0.98rem; }
-        .features-heading { margin: 27px 0 12px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; }
-        .product-features { list-style: none; border-top: 1px solid #efeeeb; }
-        .product-features li { padding: 12px 0; color: #5f5d58; border-bottom: 1px solid #efeeeb; font-size: 0.9rem; }
-        .video-box { margin-top: 28px !important; border-radius: 24px !important; background: #f2f0ec; }
-        .video-box iframe { height: clamp(260px, 45vw, 500px) !important; border-radius: 24px !important; }
-        .similar-products { margin-top: 42px; }
-        .similar-products h2 { margin-bottom: 18px; font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; }
-        .similar-products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-        .similar-product { min-width: 0; }
-        .similar-product img { width: 100%; aspect-ratio: 4 / 3; border-radius: 20px; background: #f2f0ec; object-fit: cover; transition: filter 0.2s ease; }
-        .similar-product:hover img { filter: brightness(0.97); }
-        .similar-product-name { margin-top: 10px; font-size: 0.88rem; font-weight: 700; }
-        .similar-product-label { color: #77756f; font-size: 0.78rem; }
-        .product-contact { display: flex; justify-content: center; margin-top: 38px; }
-        .product-contact.is-sticky {
-            position: fixed;
-            z-index: 1100;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: 0;
-            padding: 12px max(20px, calc((100vw - 820px) / 2)) calc(12px + env(safe-area-inset-bottom));
-            border-top: 1px solid #efeeeb;
+        body {
+            background: #fbfaf8;
+            color: #292825;
+        }
+
+        .navbar {
             background: rgba(251, 250, 248, 0.94);
-            backdrop-filter: blur(14px);
-            animation: product-cta-enter 0.22s ease-out both;
         }
-        .product-contact.is-sticky a { width: min(100%, 820px); margin: 0 auto; }
-        body.has-sticky-contact footer { padding-bottom: 86px; }
-        @keyframes product-cta-enter {
-            from { opacity: 0; transform: translateY(100%); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .product-gallery {
+            padding: 144px 0 108px !important;
         }
-        .product-contact a { display: inline-flex; min-height: 54px; padding: 14px 28px; align-items: center; justify-content: center; border-radius: 999px; background: #dcefe1; color: #315f42; font-size: 0.9rem; font-weight: 700; transition: background-color 0.2s ease, transform 0.2s ease; }
-        .product-contact a:hover { background: #cfe7d5; transform: translateY(-1px); }
-        .product-hero-trigger { display: block; width: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 24px; background: #f2f0ec; cursor: zoom-in; }
-        .product-hero-trigger:focus-visible { outline: 2px solid #839774; outline-offset: 4px; }
-        .product-lightbox {
-            position: fixed;
-            z-index: 3000;
-            inset: 0;
+
+        .product-gallery .container {
+            width: min(820px, calc(100% - 40px)) !important;
+        }
+
+        .product-gallery .product-back-button {
+            margin-bottom: 18px;
+            gap: 9px;
+        }
+
+        .product-gallery .product-back-button:hover {
+            background: #f2f0ec !important;
+            color: #292825 !important;
+            border-color: #e2dfd9 !important;
+            transform: none;
+        }
+
+        .product-gallery-stack {
             display: grid;
-            grid-template-columns: 52px minmax(0, min(1100px, calc(100vw - 180px))) 52px;
+            gap: 14px;
+        }
+
+        .product-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 112px));
+            gap: 14px;
+            justify-content: start;
+        }
+
+        .product-thumbnail {
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-radius: 18px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .product-thumbnail img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            background: #f2f0ec;
+            object-fit: cover;
+        }
+
+        .product-thumbnail[aria-pressed="true"] {
+            outline: 2px solid #839774;
+            outline-offset: 3px;
+        }
+
+        .product-thumbnail:focus-visible {
+            outline: 2px solid #839774;
+            outline-offset: 3px;
+        }
+
+        .product-hero-image {
+            width: 100%;
+            height: clamp(340px, 62vw, 580px);
+            border-radius: 24px;
+            background: #f2f0ec;
+            object-fit: contain;
+        }
+
+        .product-details {
+            padding: 30px 0 8px;
+        }
+
+        .product-eyebrow {
+            color: #687f56;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .product-gallery .product-title-top {
+            width: min(900px, 100%);
+            margin: 12px 0 18px !important;
+            font-size: clamp(1.85rem, 4.3vw, 2.8rem) !important;
+            font-weight: 400 !important;
+            line-height: 1.08 !important;
+            letter-spacing: -0.035em;
+        }
+
+        .product-title-repeat {
+            margin: 22px 0 10px;
+            font-size: 1.12rem;
+            font-weight: 400;
+        }
+
+        .product-summary {
+            max-width: 680px;
+            color: #77746e;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .product-summary+.product-summary {
+            margin-top: 9px;
+        }
+
+        .product-specifications-card {
+            margin-top: 20px;
+            padding: 17px 18px;
+            border: 1px solid #ece9e4;
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .product-specifications-card h2 {
+            margin-bottom: 11px;
+            font-size: 1.08rem;
+            font-weight: 400;
+        }
+
+        .product-features {
+            margin: 0;
+            padding-left: 15px;
+            color: #827e76;
+        }
+
+        .product-features li {
+            padding: 3px 0;
+            font-size: 0.73rem;
+            line-height: 1.5;
+        }
+
+        .product-features li::marker {
+            color: #ae835c;
+        }
+
+        .video-box {
+            margin-top: 16px !important;
+            overflow: hidden !important;
+            border-radius: 16px !important;
+            background: #f2f0ec;
+        }
+
+        .video-box iframe {
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px !important;
+        }
+
+        .similar-products {
+            margin-top: 42px;
+        }
+
+        .similar-products h2 {
+            margin-bottom: 18px;
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .similar-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
-            align-content: center;
+        }
+
+        .similar-product {
+            min-width: 0;
+        }
+
+        .similar-product img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 20px;
+            background: #f2f0ec;
+            object-fit: cover;
+            transition: filter 0.2s ease;
+        }
+
+        .similar-product:hover img {
+            filter: brightness(0.97);
+        }
+
+        .similar-product-name {
+            margin-top: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .similar-product-label {
+            color: #77756f;
+            font-size: 0.78rem;
+        }
+
+        .order-card {
+            margin-top: 20px;
+            padding: 18px;
+            border: 1px solid #ece9e4;
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .order-eyebrow {
+            color: #a27a51;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .order-card h2 {
+            margin: 5px 0 6px;
+            font-size: 1.18rem;
+            font-weight: 400;
+        }
+
+        .order-description {
+            color: #89857e;
+            font-size: 0.73rem;
+            line-height: 1.55;
+        }
+
+        .order-card .product-contact {
+            margin-top: 12px;
+        }
+
+        .product-contact a {
+            display: flex;
+            width: 100%;
+            min-height: 42px;
+            padding: 10px 16px;
             align-items: center;
             justify-content: center;
-            padding: 72px 24px 52px;
-            background: rgba(250, 249, 246, 0.98);
-            backdrop-filter: blur(16px);
+            gap: 7px;
+            border-radius: 999px;
+            background: #1f9d68;
+            color: #fff;
+            font-size: 0.73rem;
+            font-weight: 700;
+            transition: background-color 0.2s ease;
+        }
+
+        .product-contact a:hover {
+            background: #198a5b;
+        }
+
+        .product-contact a i {
+            font-size: 0.82rem;
+        }
+
+        .product-hero-trigger {
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            border-radius: 24px;
+            background: #f2f0ec;
+            cursor: zoom-in;
+        }
+
+        .product-hero-trigger:focus-visible {
+            outline: 2px solid #839774;
+            outline-offset: 4px;
+        }
+
+        .product-lightbox {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
             transition: opacity 0.2s ease, visibility 0.2s ease;
         }
-        .product-lightbox.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
-        .product-lightbox figure { display: flex; min-width: 0; margin: 0; align-items: center; justify-content: center; }
-        .product-lightbox-image { display: block; width: auto; max-width: 100%; max-height: calc(100svh - 140px); border-radius: 18px; object-fit: contain; }
-        .lightbox-control { display: grid; width: 48px; height: 48px; padding: 0; place-items: center; border: 1px solid #e8e6e1; border-radius: 50%; background: rgba(255, 255, 255, 0.96); color: #484741; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
-        .lightbox-control:hover { background: #f2f0ec; border-color: #d9d7d1; }
-        .lightbox-control svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-        .lightbox-close { position: absolute; top: 18px; right: 20px; }
-        .lightbox-counter { position: absolute; bottom: 18px; left: 50%; color: #77756f; font-size: 0.82rem; transform: translateX(-50%); }
-        @media (max-width: 640px) {
-            .product-hero-trigger { border-radius: 20px; }
-            .product-lightbox { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) 50px; gap: 12px; padding: 68px 16px max(16px, env(safe-area-inset-bottom)); }
-            .product-lightbox figure { grid-column: 1 / 3; grid-row: 1; min-height: 0; }
-            .product-lightbox-image { max-height: calc(100svh - 168px); border-radius: 14px; }
-            .lightbox-previous { grid-column: 1; grid-row: 2; justify-self: end; }
-            .lightbox-next { grid-column: 2; grid-row: 2; justify-self: start; }
-            .lightbox-close { top: 14px; right: 14px; }
-            .lightbox-counter { bottom: 32px; }
+
+        .product-lightbox.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
+
+        .product-lightbox figure {
+            display: flex;
+            min-width: 0;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-lightbox-image {
+            max-height: calc(100svh - 140px);
+            border-radius: 18px;
+            object-fit: contain;
+        }
+
+        .lightbox-control svg {
+            width: 21px;
+            height: 21px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.82rem;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 820px) {
+            .product-gallery {
+                padding: 120px 0 82px !important;
+            }
+        }
+
         @media (max-width: 640px) {
-            .product-gallery { padding: 92px 0 64px !important; }
-            .product-gallery .container { width: min(820px, calc(100% - 32px)) !important; }
-            .product-gallery-stack { gap: 10px; }
-            .product-thumbnails { gap: 12px; }
-            .product-thumbnail, .product-thumbnail img { border-radius: 16px; }
-            .product-hero-image { height: clamp(300px, 92vw, 450px); border-radius: 20px; }
-            .product-details { padding-top: 24px; }
-            .similar-products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
-            .similar-product img { border-radius: 17px; }
-            .product-contact a { width: 100%; }
+            .product-hero-trigger {
+                border-radius: 20px;
+            }
+
+            .product-lightbox figure {
+                min-height: 0;
+            }
+
+            .product-lightbox-image {
+                max-height: calc(100svh - 120px);
+                border-radius: 14px;
+            }
+
+            .lightbox-counter {
+                bottom: 18px;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .product-gallery {
+                padding: 120px 0 82px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .product-gallery {
+                padding: 120px 0 82px !important;
+            }
+
+            .product-gallery .container {
+                width: min(820px, calc(100% - 32px)) !important;
+            }
+
+            .product-gallery-stack {
+                gap: 10px;
+            }
+
+            .product-thumbnails {
+                gap: 12px;
+            }
+
+            .product-thumbnail,
+            .product-thumbnail img {
+                border-radius: 16px;
+            }
+
+            .product-hero-image {
+                height: clamp(300px, 92vw, 450px);
+                border-radius: 20px;
+            }
+
+            .product-details {
+                padding-top: 24px;
+            }
+
+            .similar-products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 18px 14px;
+            }
+
+            .similar-product img {
+                border-radius: 17px;
+            }
+
+            .product-contact a {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -158,59 +451,94 @@
             </div>
         </div>
     </header>
-
+   
     <main class="product-gallery">
         <div class="container">
-            <a href="index.html" class="product-back-link">T&#235; gjitha dyert</a>
+            <a href="index.html" class="btn-back product-back-button"><i class="fa-solid fa-arrow-left"
+                    aria-hidden="true"></i> Dyert</a>
+            <h1 id="product-title" class="product-title-top">Der&#235; me Kas&#235; Greke kund&#235;r lag&#235;shtir&#235;s</h1>
 
             <div class="product-gallery-stack" aria-label="Fotot e der&#235;s">
-                <button class="product-hero-trigger" id="productHeroTrigger" type="button" aria-label="Hap fotografin&#235; n&#235; pamje t&#235; plot&#235;">
+                <button class="product-hero-trigger" id="productHeroTrigger" type="button"
+                    aria-label="Hap fotografin&#235; n&#235; pamje t&#235; plot&#235;">
                     <img class="product-hero-image" id="productHeroImage"
                         src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652622/ea91aeaa-cd22-46c9-a40a-3f9659e628d5_ckx109.jpg"
-                        alt="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s, pamja 1" fetchpriority="high">
+                        alt="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s, pamja 1"
+                        fetchpriority="high">
                 </button>
                 <div class="product-thumbnails" aria-label="Zgjidh pamjen e der&#235;s">
-                    <button class="product-thumbnail" type="button" data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652622/ea91aeaa-cd22-46c9-a40a-3f9659e628d5_ckx109.jpg"
-                        data-alt="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s, pamja 1" aria-label="Pamja 1" aria-pressed="true">
-                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652622/ea91aeaa-cd22-46c9-a40a-3f9659e628d5_ckx109.jpg" alt="" loading="lazy">
+                    <button class="product-thumbnail" type="button"
+                        data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652622/ea91aeaa-cd22-46c9-a40a-3f9659e628d5_ckx109.jpg"
+                        data-alt="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s, pamja 1"
+                        aria-label="Pamja 1" aria-pressed="true">
+                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652622/ea91aeaa-cd22-46c9-a40a-3f9659e628d5_ckx109.jpg"
+                            alt="" loading="lazy">
                     </button>
-                    <button class="product-thumbnail" type="button" data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652634/cff8113a-0298-4064-9cbf-fb44107deb5e_siqxwm.jpg"
-                        data-alt="Der&#235; me kasa kund&#235;r lag&#235;shtir&#235;s, pamja 2" aria-label="Pamja 2" aria-pressed="false">
-                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652634/cff8113a-0298-4064-9cbf-fb44107deb5e_siqxwm.jpg" alt="" loading="lazy">
+                    <button class="product-thumbnail" type="button"
+                        data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652634/cff8113a-0298-4064-9cbf-fb44107deb5e_siqxwm.jpg"
+                        data-alt="Der&#235; me kasa kund&#235;r lag&#235;shtir&#235;s, pamja 2" aria-label="Pamja 2"
+                        aria-pressed="false">
+                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652634/cff8113a-0298-4064-9cbf-fb44107deb5e_siqxwm.jpg"
+                            alt="" loading="lazy">
                     </button>
-                    <button class="product-thumbnail" type="button" data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652617/0d06818b-2abd-458c-a2cd-65989198da44_mwqglu.jpg"
-                        data-alt="Der&#235; me brav&#235; magnetike me thithje, pamja 3" aria-label="Pamja 3" aria-pressed="false">
-                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652617/0d06818b-2abd-458c-a2cd-65989198da44_mwqglu.jpg" alt="" loading="lazy">
+                    <button class="product-thumbnail" type="button"
+                        data-src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652617/0d06818b-2abd-458c-a2cd-65989198da44_mwqglu.jpg"
+                        data-alt="Der&#235; me brav&#235; magnetike me thithje, pamja 3" aria-label="Pamja 3"
+                        aria-pressed="false">
+                        <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652617/0d06818b-2abd-458c-a2cd-65989198da44_mwqglu.jpg"
+                            alt="" loading="lazy">
                     </button>
                 </div>
             </div>
 
-            <section class="product-details" aria-labelledby="product-title">
-                <p class="product-eyebrow">Dyer</p>
-                <h1 id="product-title">Der&#235; me Kas&#235; Greke kund&#235;r lag&#235;shtir&#235;s</h1>
-                <p class="product-summary">
-                    Der&#235; e punuar me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s dhe brav&#235; magnetike me thithje.
-                    Nj&#235; zgjedhje praktike p&#235;r sht&#235;pin&#235; tuaj, e p&#235;rgatitur me kujdes dhe cil&#235;si.
-                </p>
-
-                <h2 class="features-heading">Specifikimet</h2>
-                <ul class="product-features">
-                    <li>Kas&#235; greke</li>
-                    <li>Kasa kund&#235;r lag&#235;shtir&#235;s</li>
-                    <li>Brav&#235; magnetike me thithje</li>
-                </ul>
-            </section>
-
             <div class="video-box">
-                <iframe src="https://www.youtube.com/embed/ksIE9CSpdp4" title="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s"
-                    frameborder="0"
+                <iframe src="https://www.youtube.com/embed/ksIE9CSpdp4"
+                    title="Der&#235; me kas&#235; greke kund&#235;r lag&#235;shtir&#235;s" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen>
                 </iframe>
             </div>
 
+            <section class="product-details" aria-labelledby="product-title">
+                <p class="product-summary">
+                    Der&#235; me kas&#235; greke, e krijuar p&#235;r p&#235;rdorim t&#235; p&#235;rditsh&#235;m dhe
+                    p&#235;r ambiente ku ka lag&#235;shti.
+                </p>
+                <p class="product-summary">
+                    Kasa kund&#235;r lag&#235;shtir&#235;s dhe brava magnetike me thithje plot&#235;sojn&#235; pamjen
+                    dhe funksionin e saj.
+                </p>
+
+                <h2 class="product-title-repeat">Der&#235; me Kas&#235; Greke kund&#235;r lag&#235;shtir&#235;s</h2>
+
+                <div class="product-specifications-card" aria-labelledby="product-specifications-title">
+                    <h2 id="product-specifications-title">Specifikimet</h2>
+                    <ul class="product-features">
+                        <li>Kas&#235; greke</li>
+                        <li>Kasa kund&#235;r lag&#235;shtir&#235;s</li>
+                        <li>Brav&#235; magnetike me thithje</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="order-card" aria-labelledby="order-title">
+                <p class="order-eyebrow">PUNUAR SIPAS POROSIS&#203;</p>
+                <h2 id="order-title">Kontakto p&#235;r porosi ose Cmim</h2>
+                <p class="order-description">Duke qenë se çdo porosi ndryshon në bazë të materialit dhe përmasave, nuk
+                    mund të përcaktojmë një çmim të saktë. Na shkruaj në WhatsApp për më shumë detaje ose për të bërë
+                    një porosi direkt.</p>
+
+                <div class="product-contact">
+                    <a href="https://wa.me/355682054255?text=P%C3%ABrsh%C3%ABndetje%2C%20jam%20i%20interesuar%20p%C3%ABr%20k%C3%ABt%C3%AB%20der%C3%AB.%20Linku%3A%20https%3A%2F%2Fmobileri-gazi-adi.com%2FDyer%2Fdera8.html"
+                        target="_blank" rel="noopener">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        Kontakto n&#235; WhatsApp
+                    </a>
+                </div>
+            </section>
+
             <section class="similar-products" aria-labelledby="similar-products-title">
-                <h2 id="similar-products-title">Similar products</h2>
+                <h2 id="similar-products-title">Produkte t&#235; Ngjashme</h2>
                 <div class="similar-products-grid">
                     <a class="similar-product" href="dera6.html">
                         <img src="https://res.cloudinary.com/dvmlfeuoc/image/upload/v1786652353/3657e976-d843-4e0a-8413-f111c6e69620_kjbdre.jpg"
@@ -232,13 +560,6 @@
                     </a>
                 </div>
             </section>
-
-            <div class="product-contact">
-                <a href="https://wa.me/355682054255?text=P%C3%ABrsh%C3%ABndetje%2C%20jam%20i%20interesuar%20p%C3%ABr%20k%C3%ABt%C3%AB%20der%C3%AB.%20Linku%3A%20https%3A%2F%2Fmobileri-gazi-adi.com%2FDyer%2Fdera8.html"
-                    target="_blank" rel="noopener">
-                    Kontakto n&#235; WhatsApp
-                </a>
-            </div>
         </div>
     </main>
 
@@ -281,10 +602,12 @@
                     <h5>Cataloge</h5>
                     <ul>
                         <li>
-                            <a href="https://heyzine.com/flip-book/671d4df620.html" target="_blank" rel="noopener">Catalogu i Divaneve</a>
+                            <a href="https://heyzine.com/flip-book/671d4df620.html" target="_blank"
+                                rel="noopener">Catalogu i Divaneve</a>
                         </li>
                         <li>
-                            <a href="https://heyzine.com/flip-book/c17df69e42.html" target="_blank" rel="noopener">Catalogu i Dyerve</a>
+                            <a href="https://heyzine.com/flip-book/c17df69e42.html" target="_blank"
+                                rel="noopener">Catalogu i Dyerve</a>
                         </li>
                     </ul>
                 </div>
@@ -292,7 +615,8 @@
                     <h5>Kontakt</h5>
                     <div class="footer-contact-item">
                         <span class="ic"><i class="fa-solid fa-location-dot"></i></span>
-                        <a class="location-map-link" href="https://share.google/H0lHHY8fjLXv1E3Ea" target="_blank" rel="noopener" aria-label="Hap vendndodhjen në Google Maps">Nikel, Fushë Krujë</a>
+                        <a class="location-map-link" href="https://share.google/H0lHHY8fjLXv1E3Ea" target="_blank"
+                            rel="noopener" aria-label="Hap vendndodhjen në Google Maps">Nikel, Fushë Krujë</a>
                     </div>
                     <div class="footer-contact-item">
                         <span class="ic"><i class="fa-solid fa-phone"></i></span>
@@ -348,14 +672,14 @@
             function openLightbox() {
                 previousFocus = document.activeElement;
                 showImage(activeIndex);
-                lightbox.classList.add('is-open');
+                lightbox.classList.add('is-open', 'active');
                 lightbox.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
                 closeButton.focus();
             }
 
             function closeLightbox() {
-                lightbox.classList.remove('is-open');
+                lightbox.classList.remove('is-open', 'active');
                 lightbox.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
                 if (previousFocus) previousFocus.focus();
@@ -398,33 +722,28 @@
                     }
                 }
             });
-
-            const gallery = document.querySelector('.product-gallery-stack');
-            const contact = document.querySelector('.product-contact');
-            if (!gallery || !contact || !('IntersectionObserver' in window)) return;
-
-            const galleryObserver = new IntersectionObserver(function (entries) {
-                const entry = entries[0];
-                const pastGallery = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
-                contact.classList.toggle('is-sticky', pastGallery);
-                document.body.classList.toggle('has-sticky-contact', pastGallery);
-            }, { threshold: 0 });
-
-            galleryObserver.observe(gallery);
         });
     </script>
-    <div class="product-lightbox" id="productLightbox" role="dialog" aria-modal="true" aria-label="Fotot e der&#235;s" aria-hidden="true" tabindex="-1">
+    <div class="lightbox product-lightbox" id="productLightbox" role="dialog" aria-modal="true"
+        aria-label="Fotot e der&#235;s" aria-hidden="true" tabindex="-1">
         <button class="lightbox-control lightbox-close" id="lightboxClose" type="button" aria-label="Mbyll pamjen">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18"></path>
+            </svg>
         </button>
-        <button class="lightbox-control lightbox-previous" id="lightboxPrevious" type="button" aria-label="Fotoja e m&#235;parshme">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+        <button class="lightbox-control lightbox-previous lightbox-prev" id="lightboxPrevious" type="button"
+            aria-label="Fotoja e m&#235;parshme">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6"></path>
+            </svg>
         </button>
         <figure>
             <img class="product-lightbox-image" id="lightboxImage" src="" alt="">
         </figure>
         <button class="lightbox-control lightbox-next" id="lightboxNext" type="button" aria-label="Fotoja tjet&#235;r">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 18l6-6-6-6"></path>
+            </svg>
         </button>
         <p class="lightbox-counter" id="lightboxCounter" aria-live="polite"></p>
     </div>
