@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5R6V17EBNQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5R6V17EBNQ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <title>Produkti po ngarkohet | Mobileri Gazi Adi</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="product-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="script.js" defer></script>
+    <script src="product-page.js" defer></script>
+    <style>
+        .product-page-state {
+            margin: 16px 0 0;
+            color: #77746e;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .product-page-state h1 {
+            margin-bottom: 14px !important;
+        }
+
+        .product-page-state.is-error {
+            max-width: 680px;
+            padding: 22px;
+            border: 1px solid #ece9e4;
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .product-page-state p {
+            margin: 0;
+        }
+
+        .product-page-retry {
+            min-height: 42px;
+            margin-top: 16px;
+            padding: 10px 16px;
+            border: 1px solid #e2dfd9;
+            border-radius: 999px;
+            background: #fbfaf8;
+            color: #292825;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .product-page-retry:hover {
+            background: #f2f0ec;
+        }
+
+        .product-gallery-empty {
+            margin: 0;
+            padding: 24px;
+            border-radius: 18px;
+            background: #f2f0ec;
+            color: #77746e;
+            font-size: 0.9rem;
+        }
+
+        .similar-product-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 20px;
+            background: #f2f0ec;
+        }
+
+        @media (max-width: 640px) {
+            .similar-product-placeholder {
+                border-radius: 17px;
+            }
+        }
+
+        .video-box[hidden],
+        .product-page-state[hidden],
+        #productContent[hidden],
+        .product-specifications-card[hidden],
+        .similar-products[hidden],
+        .product-gallery-stack[hidden],
+        .product-gallery-empty[hidden],
+        .lightbox-control[hidden] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <span class="logo-dot"></span>
+                Mobileri Gazi Adi
+            </a>
+
+            <nav class="navbar-menu">
+                <a href="index.html">Kreu</a>
+                <a href="categories.html">Kategoritë</a>
+                <a href="produktet.html">Produktet</a>
+                <a href="about.html">Rreth Nesh</a>
+                <a href="contact.html">Kontakt</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger" aria-label="Hap menunë">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Kreu</a>
+                <a href="categories.html">Kategoritë</a>
+                <a href="produktet.html">Produktet</a>
+                <a href="about.html">Rreth Nesh</a>
+                <a href="contact.html">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-gallery" id="productPage" aria-busy="true">
+        <div class="container">
+            <a href="produktet.html" class="btn-back product-back-button">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Produktet
+            </a>
+
+            <div class="product-page-state" id="productPageState" role="status" aria-live="polite">
+                <h1 class="product-title-top" id="productPageStateTitle">Produkti po ngarkohet…</h1>
+                <p id="productPageStateMessage">Ju lutemi prisni pak.</p>
+                <button class="product-page-retry" id="productRetry" type="button" hidden>Provo përsëri</button>
+            </div>
+
+            <div id="productContent" hidden>
+                <h1 class="product-title-top" id="productTitle"></h1>
+
+                <div class="product-gallery-stack" id="productGallery" aria-label="Fotot e produktit">
+                    <button class="product-hero-trigger" id="productHeroTrigger" type="button"
+                        aria-label="Hap fotografinë në pamje të plotë">
+                        <img class="product-hero-image" id="productHeroImage" src="" alt="" fetchpriority="high">
+                    </button>
+                    <div class="product-thumbnails" id="productThumbnails" aria-label="Zgjidh pamjen e produktit"></div>
+                </div>
+                <p class="product-gallery-empty" id="productGalleryEmpty" hidden>Nuk ka fotografi për këtë produkt.</p>
+
+                <div class="video-box" id="productVideo" hidden></div>
+
+                <section class="product-details" aria-labelledby="productTitle">
+                    <div id="productDescription"></div>
+                    <h2 class="product-title-repeat" id="productTitleRepeat"></h2>
+
+                    <div class="product-specifications-card" id="productSpecificationsCard"
+                        aria-labelledby="productSpecificationsTitle" hidden>
+                        <h2 id="productSpecificationsTitle">Specifikimet</h2>
+                        <ul class="product-features" id="productSpecifications"></ul>
+                    </div>
+                </section>
+
+                <section class="order-card" aria-labelledby="orderTitle">
+                    <p class="order-eyebrow">PUNUAR SIPAS POROSISË</p>
+                    <h2 id="orderTitle">Kontakto për porosi ose çmim</h2>
+                    <p class="order-description">Duke qenë se çdo porosi ndryshon në bazë të materialit dhe përmasave,
+                        nuk mund të përcaktojmë një çmim të saktë. Na shkruaj në WhatsApp për më shumë detaje ose për të
+                        bërë një porosi direkt.</p>
+
+                    <div class="product-contact">
+                        <a id="productWhatsApp" href="https://wa.me/355682054255" target="_blank" rel="noopener">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            Kontakto në WhatsApp
+                        </a>
+                    </div>
+                </section>
+
+                <section class="similar-products" id="similarProducts" aria-labelledby="similarProductsTitle" hidden>
+                    <h2 id="similarProductsTitle">Produkte të Ngjashme</h2>
+                    <div class="similar-products-grid" id="similarProductsGrid"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid footer-grid-catalog">
+                <div class="footer-brand">
+                    <div class="navbar-logo">
+                        <span class="logo-dot"></span>
+                        Mobileri Gazi Adi
+                    </div>
+                    <p>Mobilje moderne dhe punime druri premium për çdo ambient të shtëpisë.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Menu</h5>
+                    <ul>
+                        <li><a href="index.html">Kreu</a></li>
+                        <li><a href="categories.html">Kategoritë</a></li>
+                        <li><a href="produktet.html">Produktet</a></li>
+                        <li><a href="about.html">Rreth Nesh</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Kategoritë</h5>
+                    <ul>
+                        <li><a href="kuzhina/index.html">Kuzhina</a></li>
+                        <li><a href="krevate/index.html">Dhoma e Gjumit</a></li>
+                        <li><a href="kende/index.html">Salloni</a></li>
+                        <li><a href="shkalle/index.html">Shkallë</a></li>
+                        <li><a href="Dyer/index.html">Dyer</a></li>
+                        <li><a href="dollape/index.html">Rafte</a></li>
+                        <li><a href="minibare/index.html">Minibare</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Katalogë</h5>
+                    <ul>
+                        <li><a href="https://heyzine.com/flip-book/671d4df620.html" target="_blank"
+                                rel="noopener">Katalogu i Divaneve</a></li>
+                        <li><a href="https://heyzine.com/flip-book/c17df69e42.html" target="_blank"
+                                rel="noopener">Katalogu i Dyerve</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Kontakt</h5>
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-solid fa-location-dot"></i></span>
+                        <a class="location-map-link" href="https://share.google/H0lHHY8fjLXv1E3Ea" target="_blank"
+                            rel="noopener" aria-label="Hap vendndodhjen në Google Maps">Nikel, Fushë Krujë</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-solid fa-phone"></i></span>
+                        <span>068 205 4255</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="ic"><i class="fa-brands fa-instagram"></i></span>
+                        <span>Mobileri Gazi Adi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">© 2026 Mobileri Gazi Adi — Të gjitha të drejtat e rezervuara.</div>
+        </div>
+    </footer>
+
+    <div class="lightbox product-lightbox" id="productLightbox" role="dialog" aria-modal="true"
+        aria-label="Fotot e produktit" aria-hidden="true" tabindex="-1">
+        <button class="lightbox-control lightbox-close" id="lightboxClose" type="button" aria-label="Mbyll pamjen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+        <button class="lightbox-control lightbox-previous lightbox-prev" id="lightboxPrevious" type="button"
+            aria-label="Fotoja e mëparshme">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <figure><img class="product-lightbox-image" id="lightboxImage" src="" alt=""></figure>
+        <button class="lightbox-control lightbox-next" id="lightboxNext" type="button" aria-label="Fotoja tjetër">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+        </button>
+        <p class="lightbox-counter" id="lightboxCounter" aria-live="polite"></p>
+    </div>
+</body>
+
+</html>

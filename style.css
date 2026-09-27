@@ -492,6 +492,38 @@ body > .section:first-of-type {
 
 /* Portfolio cards */
 
+.cms-category-products {
+  margin-top: clamp(3.5rem, 6vw, 5rem);
+}
+
+.cms-category-products .section-title {
+  margin-bottom: 30px;
+}
+
+.cms-category-status {
+  margin: -14px 0 28px;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.cms-category-status[hidden] {
+  display: none !important;
+}
+
+.cms-category-product-image-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  padding: 16px;
+  place-items: center;
+  background: #E9E5DF;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 .products-grid,
 .categories-grid {
   display: grid;

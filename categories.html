@@ -19,6 +19,38 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <style>
+    .cms-category-shortcuts {
+      margin-top: 64px;
+    }
+
+    .cms-category-shortcuts .section-title {
+      margin-bottom: 34px;
+    }
+
+    .cms-category-shortcuts[hidden] {
+      display: none !important;
+    }
+
+    .cms-category-image-fallback {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      min-height: 150px;
+      padding: 16px;
+      place-items: center;
+      background: #E9E5DF;
+      color: var(--color-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .cms-category-link {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -423,6 +455,13 @@
 
       </div>
 
+      <div class="cms-category-shortcuts" id="cmsCategoryShortcuts" hidden>
+        <div class="section-title">
+          <h2>Produkte të reja sipas kategorisë</h2>
+        </div>
+        <div class="products-grid" id="cmsCategoryGrid"></div>
+      </div>
+
     </div>
 
   </section>
@@ -550,6 +589,7 @@
   </a>
 
   <script src="script.js"></script>
+  <script src="cms-products.js"></script>
 </body>
 
 </html>
