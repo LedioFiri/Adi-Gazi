@@ -492,16 +492,9 @@ body > .section:first-of-type {
 
 /* Portfolio cards */
 
-.cms-category-products {
-  margin-top: clamp(3.5rem, 6vw, 5rem);
-}
-
-.cms-category-products .section-title {
-  margin-bottom: 30px;
-}
-
 .cms-category-status {
-  margin: -14px 0 28px;
+  width: min(1100px, 92%);
+  margin: 22px auto 0;
   color: var(--color-muted);
   font-size: 0.82rem;
   text-align: center;

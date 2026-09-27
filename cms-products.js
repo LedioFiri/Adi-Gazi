@@ -12,9 +12,9 @@
   const originalListingHeading = listingHeading?.textContent.trim() || '';
   const requestedCategory = new URLSearchParams(window.location.search).get('category')?.trim().toLowerCase() || '';
   const categoryPage = getCategoryPageContext();
-  const categoryProductsSection = categoryPage ? createCategoryProductsSection(categoryPage) : null;
+  const categoryStatus = categoryPage ? createCategoryStatus(categoryPage) : null;
 
-  if (!listingGrid && !categoryGrid && !categoryProductsSection) return;
+  if (!listingGrid && !categoryGrid && !categoryPage) return;
 
   function parseStructured(value) {
     if (typeof value !== 'string') return value;
@@ -65,31 +65,14 @@
     return grid ? { slug, grid } : null;
   }
 
-  function createCategoryProductsSection(category) {
-    const section = document.createElement('div');
-    section.className = 'cms-category-products';
-    section.dataset.cmsCategoryProducts = category.slug;
-
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    const eyebrow = document.createElement('span');
-    eyebrow.textContent = 'Katalogu online';
-    const heading = document.createElement('h2');
-    heading.textContent = 'Produkte të publikuara';
-    title.append(eyebrow, heading);
-
+  function createCategoryStatus(category) {
     const status = document.createElement('p');
     status.className = 'cms-category-status';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.textContent = 'Po ngarkohen produktet…';
-
-    const grid = document.createElement('div');
-    grid.className = 'products-grid';
-    section.append(title, status, grid);
-    category.grid.after(section);
-
-    return { element: section, status, grid };
+    category.grid.after(status);
+    return status;
   }
 
   function categoryMap(categories) {
@@ -306,7 +289,7 @@
   }
 
   function renderCategoryProducts(products, categoriesById) {
-    if (!categoryProductsSection || !categoryPage) return;
+    if (!categoryPage || !categoryStatus) return;
 
     const seenSlugs = new Set();
     const cards = products
@@ -320,17 +303,17 @@
       .filter(Boolean);
 
     if (!cards.length) {
-      categoryProductsSection.element.remove();
+      categoryStatus.hidden = true;
       return;
     }
 
-    categoryProductsSection.grid.replaceChildren(...cards);
-    categoryProductsSection.status.hidden = true;
+    categoryPage.grid.append(...cards);
+    categoryStatus.hidden = true;
   }
 
   function showCategoryProductsError() {
-    if (!categoryProductsSection) return;
-    categoryProductsSection.status.textContent = 'Produktet online nuk mund të ngarkoheshin tani.';
+    if (!categoryStatus) return;
+    categoryStatus.textContent = 'Produktet online nuk mund të ngarkoheshin tani.';
   }
 
   async function loadCmsProducts() {

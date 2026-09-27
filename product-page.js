@@ -22,8 +22,9 @@
   const specificationsCard = document.getElementById('productSpecificationsCard');
   const specifications = document.getElementById('productSpecifications');
   const whatsappLink = document.getElementById('productWhatsApp');
-  const similarSection = document.getElementById('similarProducts');
-  const similarGrid = document.getElementById('similarProductsGrid');
+  const relatedSection = document.getElementById('similarProducts');
+  const relatedGrid = document.getElementById('similarProductsGrid');
+  const productBackButton = document.getElementById('productBackButton');
   const lightbox = document.getElementById('productLightbox');
   const lightboxImage = document.getElementById('lightboxImage');
   const lightboxCounter = document.getElementById('lightboxCounter');
@@ -32,6 +33,15 @@
   const lightboxNext = document.getElementById('lightboxNext');
 
   const requestedSlug = new URLSearchParams(window.location.search).get('slug')?.trim() || '';
+  const categoryPaths = {
+    dyer: '/Dyer/index.html',
+    dollape: '/dollape/index.html',
+    kende: '/kende/index.html',
+    krevate: '/krevate/index.html',
+    kuzhina: '/kuzhina/index.html',
+    minibare: '/minibare/index.html',
+    shkalle: '/shkalle/index.html'
+  };
   let galleryImages = [];
   let activeImageIndex = 0;
   let previousFocus = null;
@@ -70,6 +80,18 @@
     return valueEntries(value).join('\n');
   }
 
+  function normalizeSlug(value) {
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  function updateCategoryBackLink(product) {
+    if (!productBackButton) return;
+    const productCategorySlug = normalizeSlug(product.category_slug || product.category_name);
+    const categorySlug = productCategorySlug === 'dyert' ? 'dyer' : productCategorySlug;
+    productBackButton.href = categoryPaths[categorySlug] || '/produktet.html';
+  }
+
   function unwrapProduct(payload) {
     const candidates = [payload?.product, payload?.data?.product, payload?.data, payload];
     return candidates.find((candidate) => candidate && typeof candidate === 'object' &&
@@ -77,8 +99,27 @@
   }
 
   function unwrapProductList(payload) {
-    const candidates = [payload?.products, payload?.data?.products, payload?.data, payload?.results, payload];
-    return candidates.find(Array.isArray) || [];
+    const candidates = [
+      payload?.products,
+      payload?.data?.products,
+      payload?.static_products,
+      payload?.data?.static_products,
+      payload?.static_catalogue?.products,
+      payload?.data?.static_catalogue?.products,
+      payload?.static_catalogue,
+      payload?.data?.static_catalogue,
+      payload?.catalogue?.products,
+      payload?.data?.catalogue?.products,
+      payload?.catalogue,
+      payload?.catalog?.products,
+      payload?.data?.catalog?.products,
+      payload?.items,
+      payload?.data?.items,
+      payload?.results,
+      payload?.data,
+      payload
+    ];
+    return candidates.filter(Array.isArray).flat();
   }
 
   function safeImageUrl(value) {
@@ -281,9 +322,10 @@
     specificationsCard.hidden = entries.length === 0;
   }
 
-  function renderProduct(product, slug) {
+  function renderProduct(product, slug, relatedProducts, relatedItems) {
     const productName = String(product.name).trim();
     const productImages = imageUrls(product.images);
+    updateCategoryBackLink(product);
     title.textContent = productName;
     titleRepeat.textContent = productName;
     appendTextEntries(description, valueEntries(product.description), 'product-summary');
@@ -299,29 +341,20 @@
     state.hidden = true;
     content.hidden = false;
     page.setAttribute('aria-busy', 'false');
-    loadSimilarProducts(product).catch(() => {
-      similarGrid.replaceChildren();
-      similarSection.hidden = true;
+    loadRelatedProducts(relatedProducts, relatedItems).catch(() => {
+      relatedGrid.replaceChildren();
+      relatedSection.hidden = true;
     });
   }
 
-  function isSameCategory(currentProduct, candidate) {
-    if (currentProduct.category_id != null && candidate.category_id != null) {
-      return String(currentProduct.category_id) === String(candidate.category_id);
-    }
-    const currentName = String(currentProduct.category_name || '').trim().toLocaleLowerCase();
-    const candidateName = String(candidate.category_name || '').trim().toLocaleLowerCase();
-    return Boolean(currentName && candidateName && currentName === candidateName);
-  }
-
-  function makeSimilarCard(product) {
+  function makeRelatedCard(product) {
     const slug = String(product.slug || '').trim();
     const name = String(product.name || '').trim();
     if (!slug || !name) return null;
 
     const card = document.createElement('a');
     card.className = 'similar-product';
-    card.href = `product.html?slug=${encodeURIComponent(slug)}`;
+    card.href = `/product.html?slug=${encodeURIComponent(slug)}`;
 
     const image = imageUrls(product.images)[0];
     if (image) {
@@ -353,29 +386,214 @@
     return card;
   }
 
-  async function loadSimilarProducts(currentProduct) {
-    const response = await fetch(`${API_BASE}/products`, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error('Similar products could not be loaded.');
+  function relatedSelections(responseRelatedProducts) {
+    const responseProducts = parseStructuredValue(responseRelatedProducts);
+    return Array.isArray(responseProducts) ? responseProducts : [];
+  }
 
-    const candidates = unwrapProductList(await response.json()).filter((product) =>
-      product && typeof product === 'object' && !Array.isArray(product)
-    );
-    const currentId = currentProduct.id == null ? '' : String(currentProduct.id);
-    const currentSlug = String(currentProduct.slug || requestedSlug).trim();
-    const unique = new Map();
+  function unwrapRelatedProducts(payload) {
+    const candidates = [
+      payload?.related_products,
+      payload?.product?.related_products,
+      payload?.data?.related_products,
+      payload?.data?.product?.related_products
+    ];
 
-    candidates.forEach((product) => {
-      const slug = String(product.slug || '').trim();
-      if (!slug || slug === currentSlug || (currentId && String(product.id) === currentId)) return;
-      if (!unique.has(slug)) unique.set(slug, product);
+    for (const candidate of candidates) {
+      if (candidate == null) continue;
+      const parsed = parseStructuredValue(candidate);
+      if (Array.isArray(parsed)) return parsed;
+    }
+
+    return [];
+  }
+
+  function unwrapRelatedItems(payload) {
+    const candidates = [
+      payload?.related_items,
+      payload?.product?.related_items,
+      payload?.data?.related_items,
+      payload?.data?.product?.related_items
+    ];
+
+    for (const candidate of candidates) {
+      if (candidate == null) continue;
+      const parsed = parseStructuredValue(candidate);
+      if (Array.isArray(parsed)) return parsed;
+    }
+
+    return null;
+  }
+
+  function isCompleteRelatedProduct(value) {
+    return Boolean(value && typeof value === 'object' && !Array.isArray(value) && value.name && value.slug);
+  }
+
+  function resolveRelatedProduct(selection, productsById, productsBySlug) {
+    if (isCompleteRelatedProduct(selection)) return selection;
+
+    const reference = selection && typeof selection === 'object' && !Array.isArray(selection)
+      ? selection
+      : { id: selection, slug: selection };
+    const slug = String(reference.slug || reference.product_slug || '').trim();
+    const referenceId = reference.id ?? reference.product_id;
+    const id = referenceId == null ? '' : String(referenceId);
+    return (slug && productsBySlug.get(slug)) || (id && productsById.get(id)) || null;
+  }
+
+  function staticCatalogueKey(product) {
+    const values = [
+      product?.key,
+      product?.product_key,
+      product?.static_key,
+      product?.static_path,
+      product?.path,
+      product?.relative_path,
+      product?.relative_url,
+      product?.html_path,
+      product?.filename,
+      product?.href,
+      product?.url
+    ];
+
+    for (const value of values) {
+      if (typeof value !== 'string' || !value.trim()) continue;
+      return value.trim().replace(/\\/g, '/').replace(/^\.\//, '').replace(/^\/+/, '').toLowerCase();
+    }
+
+    return '';
+  }
+
+  function staticProductName(key) {
+    const filename = String(key || '').replace(/\\/g, '/').split('/').pop() || '';
+    return filename.replace(/\.html?$/i, '').trim();
+  }
+
+  function staticProductCategory(product, key) {
+    const category = product?.category_name || product?.categoryName || product?.category;
+    if (typeof category === 'string' && category.trim()) return category.trim();
+    if (category && typeof category === 'object') {
+      const name = category.name || category.title;
+      if (name) return String(name).trim();
+    }
+
+    const folder = String(key || '').replace(/\\/g, '/').split('/').filter(Boolean)[0] || '';
+    return folder ? folder.charAt(0).toLocaleUpperCase() + folder.slice(1) : '';
+  }
+
+  function makeStaticRelatedCard(key, product) {
+    const relativeKey = String(key || '').trim().replace(/\\/g, '/').replace(/^\/+/, '');
+    if (!relativeKey) return null;
+
+    const name = String(product?.name || staticProductName(relativeKey)).trim();
+    if (!name) return null;
+
+    const card = document.createElement('a');
+    card.className = 'similar-product';
+    card.href = String(product?.url || `/${relativeKey}`);
+
+    const imageValue = product?.images ?? product?.image_url ?? product?.imageUrl ??
+      product?.image ?? product?.thumbnail ?? product?.photo ?? product?.src;
+    const image = imageUrls(imageValue)[0];
+    if (image) {
+      const imageElement = document.createElement('img');
+      imageElement.src = image;
+      imageElement.alt = name;
+      imageElement.loading = 'lazy';
+      imageElement.decoding = 'async';
+      card.append(imageElement);
+    } else {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'similar-product-placeholder';
+      placeholder.setAttribute('aria-hidden', 'true');
+      card.append(placeholder);
+    }
+
+    const nameElement = document.createElement('p');
+    nameElement.className = 'similar-product-name';
+    nameElement.textContent = name;
+    card.append(nameElement);
+
+    const category = staticProductCategory(product, relativeKey);
+    if (category) {
+      const label = document.createElement('p');
+      label.className = 'similar-product-label';
+      label.textContent = category;
+      card.append(label);
+    }
+
+    return card;
+  }
+
+  async function loadRelatedProducts(responseRelatedProducts, responseRelatedItems) {
+    relatedGrid.replaceChildren();
+    const selections = Array.isArray(responseRelatedItems)
+      ? responseRelatedItems
+      : relatedSelections(responseRelatedProducts);
+    if (!selections.length) {
+      relatedSection.hidden = true;
+      return;
+    }
+
+    const relatedProductsById = new Map(relatedSelections(responseRelatedProducts)
+      .filter((product) => product && typeof product === 'object' && product.id != null)
+      .map((product) => [String(product.id), product]));
+    let candidates = [];
+    const hasStaticItems = Array.isArray(responseRelatedItems) && selections.some((selection) => selection?.type === 'static');
+    const needsCatalogue = hasStaticItems || selections.some((selection) => {
+      if (Array.isArray(responseRelatedItems) && selection?.type === 'cms') {
+        return !relatedProductsById.has(String(selection.id ?? ''));
+      }
+      return !isCompleteRelatedProduct(selection);
     });
 
-    const available = Array.from(unique.values());
-    const preferred = available.filter((product) => isSameCategory(currentProduct, product));
-    const ordered = [...preferred, ...available.filter((product) => !preferred.includes(product))].slice(0, 3);
-    similarGrid.replaceChildren();
-    ordered.map(makeSimilarCard).filter(Boolean).forEach((card) => similarGrid.append(card));
-    similarSection.hidden = similarGrid.children.length === 0;
+    if (needsCatalogue) {
+      try {
+        const response = await fetch(`${API_BASE}/products`, { headers: { Accept: 'application/json' } });
+        if (response.ok) {
+          candidates = unwrapProductList(await response.json()).filter((candidate) =>
+            candidate && typeof candidate === 'object' && !Array.isArray(candidate)
+          );
+        } else if (!hasStaticItems) {
+          throw new Error('Related products could not be loaded.');
+        }
+      } catch (error) {
+        if (!hasStaticItems) throw error;
+      }
+    }
+
+    const productsById = new Map(candidates
+      .filter((candidate) => candidate.id != null)
+      .map((candidate) => [String(candidate.id), candidate]));
+    const productsBySlug = new Map(candidates
+      .filter((candidate) => candidate.slug)
+      .map((candidate) => [String(candidate.slug), candidate]));
+    const staticProductsByKey = new Map(candidates
+      .map((candidate) => [staticCatalogueKey(candidate), candidate])
+      .filter(([key]) => key));
+    const cards = Array.isArray(responseRelatedItems)
+      ? selections.map((selection) => {
+        if (!selection || typeof selection !== 'object') return null;
+        if (selection.type === 'cms') {
+          const id = selection.id == null ? '' : String(selection.id);
+          const product = relatedProductsById.get(id) || productsById.get(id);
+          return product ? makeRelatedCard(product) : null;
+        }
+        if (selection.type === 'static') {
+          const key = String(selection.key || '').trim();
+          const normalizedKey = key.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^\/+/, '').toLowerCase();
+          return makeStaticRelatedCard(key, { ...(staticProductsByKey.get(normalizedKey) || {}), ...selection });
+        }
+        return null;
+      }).filter(Boolean)
+      : selections
+        .map((selection) => resolveRelatedProduct(selection, productsById, productsBySlug))
+        .filter(Boolean)
+        .map(makeRelatedCard)
+        .filter(Boolean);
+
+    relatedGrid.replaceChildren(...cards);
+    relatedSection.hidden = cards.length === 0;
   }
 
   async function fetchProduct(slug) {
@@ -389,9 +607,14 @@
       });
       if (response.status === 404) return { notFound: true };
       if (!response.ok) throw new Error(`Product request failed with status ${response.status}.`);
-      const product = unwrapProduct(await response.json());
+      const payload = await response.json();
+      const product = unwrapProduct(payload);
       if (!product || !String(product.name || '').trim()) throw new Error('The product response was incomplete.');
-      return { product };
+      return {
+        product,
+        relatedProducts: unwrapRelatedProducts(payload),
+        relatedItems: unwrapRelatedItems(payload)
+      };
     } finally {
       window.clearTimeout(timeout);
     }
@@ -412,7 +635,7 @@
         setPageState('Produkt nuk u gjet', 'Produkti i kërkuar nuk ekziston ose nuk është i disponueshëm.', { error: true });
         return;
       }
-      renderProduct(result.product, requestedSlug);
+      renderProduct(result.product, requestedSlug, result.relatedProducts, result.relatedItems);
     } catch {
       setPageState('Produkti nuk u ngarkua', 'Nuk mund të merret informacioni tani. Kontrolloni lidhjen dhe provoni përsëri.', {
         error: true,
