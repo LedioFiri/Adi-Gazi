@@ -171,8 +171,15 @@
   }
 
   function setMeta(selector, contentValue) {
-    const element = document.querySelector(selector);
-    if (element) element.setAttribute('content', contentValue);
+    let element = document.querySelector(selector);
+    if (!element) {
+      const match = selector.match(/^meta\[(name|property)="([^"]+)"\]$/);
+      if (!match) return;
+      element = document.createElement('meta');
+      element.setAttribute(match[1], match[2]);
+      document.head.append(element);
+    }
+    element.setAttribute('content', contentValue);
   }
 
   function productPageUrl(slug) {
@@ -181,29 +188,62 @@
     return url;
   }
 
+  function canonicalProductPageUrl(slug) {
+    return `https://mobileri-gazi-adi.com/product.html?slug=${encodeURIComponent(slug)}`;
+  }
+
+  function updateProductStructuredData(product, productImages) {
+    const productName = String(product.name || '').trim();
+    if (!productName) return;
+
+    const data = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: productName
+    };
+    const productDescription = plainText(product.description);
+    if (productDescription) data.description = productDescription;
+    if (productImages.length) data.image = productImages[0];
+
+    let structuredData = document.getElementById('cmsProductJsonLd');
+    if (!structuredData) {
+      structuredData = document.createElement('script');
+      structuredData.id = 'cmsProductJsonLd';
+      structuredData.type = 'application/ld+json';
+      document.head.append(structuredData);
+    }
+    structuredData.textContent = JSON.stringify(data).replace(/</g, '\\u003c');
+  }
+
   function updateSeo(product, productImages, slug) {
     const productName = String(product.name).trim();
     const productDescription = plainText(product.description);
     const pageTitle = `${productName} | Mobileri Gazi Adi`;
     document.title = pageTitle;
 
-    const descriptionMeta = document.querySelector('meta[name="description"]');
-    if (descriptionMeta) descriptionMeta.setAttribute('content', productDescription);
+    setMeta('meta[name="description"]', productDescription);
     setMeta('meta[property="og:title"]', pageTitle);
     setMeta('meta[property="og:description"]', productDescription);
     setMeta('meta[property="og:image"]', productImages[0] || '');
+    setMeta('meta[name="twitter:title"]', pageTitle);
+    setMeta('meta[name="twitter:description"]', productDescription);
+    setMeta('meta[name="twitter:image"]', productImages[0] || '');
 
     if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-      const canonical = productPageUrl(slug).href;
-      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      const canonical = canonicalProductPageUrl(slug);
+      const canonicalLinks = Array.from(document.querySelectorAll('link[rel="canonical"]'));
+      let canonicalLink = canonicalLinks.shift();
       if (!canonicalLink) {
         canonicalLink = document.createElement('link');
         canonicalLink.rel = 'canonical';
         document.head.append(canonicalLink);
       }
+      canonicalLinks.forEach((link) => link.remove());
       canonicalLink.href = canonical;
       setMeta('meta[property="og:url"]', canonical);
     }
+
+    updateProductStructuredData(product, productImages);
   }
 
   function setPageState(heading, message, { error = false, retry = false } = {}) {
